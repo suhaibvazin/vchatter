@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "926510339760",
+    "project_id": "vchatter",
+    "storage_bucket": "vchatter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926510339760:android:1db1ee7bc28839e691cd75",
+        "android_client_info": {
+          "package_name": "com.vortexconsortium.vchatter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "926510339760-2svi4nh2c8dj28isfv7bft0luo8akbrk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAd2-xazXiGq1F28k3TJ6qJFGVkw7YVegw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "926510339760-2svi4nh2c8dj28isfv7bft0luo8akbrk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
