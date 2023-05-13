@@ -1,29 +1,28 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vchatter/helper_functions/navigator.dart';
 import 'package:vchatter/helper_functions/validators.dart';
-import 'package:vchatter/screens/login_page.dart';
+import 'package:vchatter/screens/register_page.dart';
 import 'package:vchatter/themes/styles.dart';
 import 'package:vchatter/widgets/text_field_entry.dart';
 
-class RegisterPageView extends StatefulWidget {
-  const RegisterPageView({super.key});
+class LoginPageView extends StatefulWidget {
+  const LoginPageView({super.key});
 
   @override
-  State<RegisterPageView> createState() => _RegisterPageViewState();
+  State<LoginPageView> createState() => _LoginPageViewState();
 }
 
-class _RegisterPageViewState extends State<RegisterPageView> {
+class _LoginPageViewState extends State<LoginPageView> {
   late TextEditingController _nameController;
-  late TextEditingController _emailController;
   late TextEditingController _passwordController;
 
   @override
   void initState() {
     _nameController = TextEditingController();
-    _emailController = TextEditingController();
     _passwordController = TextEditingController();
     super.initState();
   }
@@ -31,7 +30,6 @@ class _RegisterPageViewState extends State<RegisterPageView> {
   @override
   void dispose() {
     _nameController.dispose();
-    _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -61,7 +59,7 @@ class _RegisterPageViewState extends State<RegisterPageView> {
                   text: const TextSpan(
                     children: <TextSpan>[
                       TextSpan(
-                        text: 'Create an account',
+                        text: 'Welcome back!',
                         style: TextStyle(
                           fontFamily: 'product sans',
                           fontSize: 32,
@@ -89,23 +87,14 @@ class _RegisterPageViewState extends State<RegisterPageView> {
               ),
               Column(
                 children: [
-                  //name text field
+                  //password text field
                   TextFieldEntry(
                     controller: _nameController,
                     label: 'Name',
-                    icon: const Icon(Icons.person_4_outlined),
+                    icon: const Icon(Icons.person_outline_outlined),
                   ),
                   const SizedBox(
                     height: 20,
-                  ),
-                  //password text field
-                  TextFieldEntry(
-                    controller: _emailController,
-                    label: 'Email',
-                    icon: const Icon(Icons.email_outlined),
-                  ),
-                  const SizedBox(
-                    height: 60,
                   ),
                   TextFieldEntry(
                     controller: _passwordController,
@@ -113,13 +102,12 @@ class _RegisterPageViewState extends State<RegisterPageView> {
                     icon: const Icon(Icons.lock_outlined),
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 120,
                   ),
                   InkWell(
                     onTap: () {
                       List<String?> errors = [
                         nameValidator(_nameController.text),
-                        emailValidator(_emailController.text),
                         passwordValidator(_passwordController.text),
                       ];
 
@@ -163,7 +151,7 @@ class _RegisterPageViewState extends State<RegisterPageView> {
                           borderRadius: BorderRadius.circular(15),
                           color: Colors.white),
                       child: const Text(
-                        'Create account',
+                        'Login',
                         style: TextStyle(
                             fontSize: 15,
                             fontFamily: 'product sans',
@@ -224,10 +212,10 @@ class _RegisterPageViewState extends State<RegisterPageView> {
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
                       ),
-                      text: 'Already have an account? ',
+                      text: 'Back to? ',
                       children: <TextSpan>[
                         TextSpan(
-                          text: 'Login',
+                          text: 'Signup',
                           style: const TextStyle(
                             fontFamily: 'product sans',
                             color: Colors.white,
@@ -236,8 +224,8 @@ class _RegisterPageViewState extends State<RegisterPageView> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              Navigator.of(context).pushReplacement(
-                                  createRoute(context, const LoginPageView()));
+                              Navigator.of(context).push(createRoute(
+                                  context, const RegisterPageView()));
                             },
                         ),
                       ],

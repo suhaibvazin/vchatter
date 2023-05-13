@@ -1,4 +1,6 @@
 //Email validator
+import 'package:flutter/material.dart';
+
 String? emailValidator(String? email) {
   // Check if the value is empty
   if (email?.isEmpty ?? true) {
@@ -37,4 +39,13 @@ String? passwordValidator(String? password) {
     return 'Password must contain at least one special character';
   }
   return null;
+}
+
+//name validator
+String? nameValidator(String? name) {
+  if (name?.isNotEmpty ?? true) {
+    return null;
+  } else {
+    return 'Name cannot be empty';
+  }
 }

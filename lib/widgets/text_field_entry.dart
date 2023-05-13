@@ -3,32 +3,65 @@ import 'package:flutter/material.dart';
 class TextFieldEntry extends StatelessWidget {
   final String label;
   final Icon? icon;
-  final String? Function(String?)? validator;
+  final TextEditingController controller;
   const TextFieldEntry({
     super.key,
-    this.validator,
     required this.label,
     this.icon,
+    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      validator: validator,
-      decoration: InputDecoration(
-        prefixIcon: icon,
-        floatingLabelBehavior: FloatingLabelBehavior.auto,
-        labelText: label,
-        fillColor: Colors.white,
-        filled: true,
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(width: 2, strokeAlign: 1, color: Colors.grey),
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            width: 2,
-            strokeAlign: 1,
-            color: Color.fromARGB(255, 3, 12, 71),
+    return Container(
+      height: 50,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: const Color.fromARGB(255, 0, 0, 0)
+                .withOpacity(0.2), // Set shadow color
+            spreadRadius: 1,
+            blurRadius: 1,
+            offset: const Offset(0, 1), // Offset of the shadow
+          ),
+        ],
+      ),
+      child: TextFormField(
+        autocorrect: false,
+        keyboardType:
+            label == 'Email' ? TextInputType.emailAddress : TextInputType.text,
+        obscureText: label == 'Password' ? true : false,
+        controller: controller,
+        style: const TextStyle(color: Colors.white70),
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.fromLTRB(10, 5, 10, 7),
+          border: InputBorder.none,
+          fillColor: const Color.fromARGB(122, 84, 92, 120),
+          filled: true,
+          prefixIcon: icon,
+          prefixIconColor: const Color.fromARGB(255, 84, 92, 120),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(
+              width: 2,
+              strokeAlign: 1,
+              color: Colors.grey,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          label: Text(
+            label,
+            style: const TextStyle(
+                fontFamily: 'product sans',
+                color: Color.fromARGB(255, 131, 144, 191),
+                fontSize: 15,
+                fontWeight: FontWeight.w400),
           ),
         ),
       ),

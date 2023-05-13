@@ -1,16 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:vchatter/screens/login.dart';
-
-import 'firebase_options.dart';
+import 'package:vchatter/screens/login_page.dart';
+import 'package:vchatter/screens/splash_screens.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
     title: 'Flutter Demo',
-    home: const HomePage(),
+    home: HomePage(),
   ));
 }
 
@@ -24,6 +21,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return LoginPage();
+    return const SplashScreen();
   }
 }
