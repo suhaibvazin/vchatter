@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:vchatter/helper_functions/navigator.dart';
-import 'package:vchatter/screens/login_page.dart';
+import 'login_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,7 +19,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigateToHome() {
-    // Delay the navigation to simulate a splash screen
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context)
           .pushReplacement(createRoute(context, const LoginPageView()));

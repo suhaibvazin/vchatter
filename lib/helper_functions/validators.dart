@@ -1,5 +1,4 @@
 //Email validator
-import 'package:flutter/material.dart';
 
 String? emailValidator(String? email) {
   // Check if the value is empty

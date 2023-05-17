@@ -1,13 +1,27 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:vchatter/screens/login_page.dart';
-import 'package:vchatter/screens/splash_screens.dart';
+import 'package:vchatter/auth/presentation/ui/bloc/auth_bloc.dart';
+import 'package:vchatter/auth/presentation/ui/screens/splash_screens.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'auth/data/repository/auth_repository.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: 'Flutter Demo',
-    home: HomePage(),
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(RepositoryProvider(
+    create: (context) => AuthRepository(),
+    child: BlocProvider(
+      create: (context) => AuthBloc(authRepository: AuthRepository()),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        home: HomePage(),
+      ),
+    ),
   ));
 }
 
