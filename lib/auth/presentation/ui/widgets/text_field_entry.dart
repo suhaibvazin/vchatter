@@ -20,10 +20,10 @@ class TextFieldEntry extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: const Color.fromARGB(255, 0, 0, 0)
-                .withOpacity(0.2), // Set shadow color
-            spreadRadius: 1,
-            blurRadius: 1,
-            offset: const Offset(0, 1), // Offset of the shadow
+                .withOpacity(0.9), // Set shadow color
+            spreadRadius: 1.0,
+            blurRadius: 12.0,
+            offset: const Offset(0, 0), // Offset of the shadow
           ),
         ],
       ),
