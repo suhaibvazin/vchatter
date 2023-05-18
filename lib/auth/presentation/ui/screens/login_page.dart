@@ -109,22 +109,20 @@ class _LoginPageViewState extends State<LoginPageView> {
                     ),
                     Column(
                       children: [
-                        //password text field
+                        //phone number field
                         TextFieldEntry(
                           controller: _emailController,
-                          label: 'Email',
-                          icon: const Icon(Icons.person_outline_outlined),
+                          label: 'Phone',
+                          icon: const Icon(Icons.phone),
+                          suffixIconButton: IconButton(
+                            icon: const Icon(Icons.arrow_forward_ios_rounded),
+                            color: Colors.white,
+                            onPressed: () {},
+                            splashRadius: 20.0,
+                          ),
                         ),
                         const SizedBox(
-                          height: 20,
-                        ),
-                        TextFieldEntry(
-                          controller: _passwordController,
-                          label: 'Password',
-                          icon: const Icon(Icons.lock_outlined),
-                        ),
-                        const SizedBox(
-                          height: 120,
+                          height: 100,
                         ),
                         InkWell(
                           onTap: () {
