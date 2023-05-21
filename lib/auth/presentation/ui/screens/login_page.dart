@@ -1,16 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vchatter/auth/presentation/ui/screens/register_page.dart';
 import 'package:vchatter/helper_functions/navigator.dart';
-import 'package:vchatter/helper_functions/validators.dart';
-import 'package:vchatter/themes/styles.dart';
+
 import 'package:vchatter/auth/presentation/ui/widgets/text_field_entry.dart';
 
 import '../bloc/auth_bloc.dart';
 import 'home_screen.dart';
+import 'otp_screen.dart';
 
 class LoginPageView extends StatefulWidget {
   final AuthState? authState;
@@ -48,6 +48,11 @@ class _LoginPageViewState extends State<LoginPageView> {
             Navigator.of(context)
                 .pushReplacement(createRoute(context, const HomeScreen()));
           }
+          if (state is AuthCodeSentSuccessState) {
+            Navigator.of(context).pushReplacement(createRoute(
+                context, OtpScreen(verificationId: state.verificationId)));
+          }
+
           if (state is AuthErrorState) {
             // Displaying the error message if the user is not authenticated
             ScaffoldMessenger.of(context)
@@ -112,79 +117,9 @@ class _LoginPageViewState extends State<LoginPageView> {
                         //phone number field
                         TextFieldEntry(
                           controller: _emailController,
-                          label: 'Phone',
-                          icon: const Icon(Icons.phone),
-                          suffixIconButton: IconButton(
-                            icon: const Icon(Icons.arrow_forward_ios_rounded),
-                            color: Colors.white,
-                            onPressed: () {},
-                            splashRadius: 20.0,
-                          ),
                         ),
                         const SizedBox(
                           height: 100,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            List<String?> errors = [
-                              nameValidator(_emailController.text),
-                              passwordValidator(_passwordController.text),
-                            ];
-
-                            if (errors.every((element) => element == null)) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  backgroundColor:
-                                      const Color.fromARGB(122, 84, 92, 120),
-                                  duration: const Duration(seconds: 4),
-                                  content: Text(
-                                    'Processesing Please wait!!',
-                                    style: errorStyle,
-                                  ),
-                                ),
-                              );
-
-                              BlocProvider.of<AuthBloc>(context).add(
-                                AuthLogInEvent(_emailController.text,
-                                    _passwordController.text),
-                              );
-                            }
-
-                            for (var error in errors) {
-                              if (error != null) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    backgroundColor:
-                                        const Color.fromARGB(122, 84, 92, 120),
-                                    duration:
-                                        const Duration(milliseconds: 1000),
-                                    content: Text(
-                                      error,
-                                      style: errorStyle,
-                                    ),
-                                  ),
-                                );
-                                HapticFeedback.heavyImpact();
-                                break;
-                              }
-                            }
-                          },
-                          child: Container(
-                            height: 42,
-                            width: 280,
-                            alignment: AlignmentDirectional.center,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white),
-                            child: const Text(
-                              'Login',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontFamily: 'product sans',
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
-                            ),
-                          ),
                         ),
                         const SizedBox(
                           height: 20,
@@ -270,7 +205,7 @@ class _LoginPageViewState extends State<LoginPageView> {
               ),
             );
           }
-          return Container();
+          return const Center();
         },
       ),
     );

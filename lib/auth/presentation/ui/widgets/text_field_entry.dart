@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vchatter/auth/presentation/ui/bloc/auth_bloc.dart';
 
-class TextFieldEntry extends StatelessWidget {
-  final String label;
-  final Icon? icon;
+class TextFieldEntry extends StatefulWidget {
   final TextEditingController controller;
-  final IconButton? suffixIconButton;
 
   const TextFieldEntry({
     super.key,
-    required this.label,
-    this.icon,
     required this.controller,
-    this.suffixIconButton,
   });
 
   @override
+  State<TextFieldEntry> createState() => _TextFieldEntryState();
+}
+
+class _TextFieldEntryState extends State<TextFieldEntry> {
+  bool isTickVisible = true;
+  @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      width: double.infinity,
+      height: 55,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
@@ -32,40 +35,56 @@ class TextFieldEntry extends StatelessWidget {
       ),
       child: TextFormField(
         autocorrect: false,
-        keyboardType:
-            label == 'Email' ? TextInputType.text : TextInputType.phone,
-        obscureText: label == 'Password' ? true : false,
-        controller: controller,
+        keyboardType: TextInputType.phone,
+        obscureText: false,
+        controller: widget.controller,
         style: const TextStyle(color: Colors.white70),
         decoration: InputDecoration(
-            contentPadding: const EdgeInsets.fromLTRB(10, 5, 10, 7),
-            fillColor: const Color.fromARGB(122, 84, 92, 120),
-            filled: true,
-            prefixIcon: icon,
-            prefixIconColor: const Color.fromARGB(255, 84, 92, 120),
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(width: 0)),
-            focusedBorder: OutlineInputBorder(
+          contentPadding: const EdgeInsets.all(10),
+          fillColor: const Color.fromARGB(122, 84, 92, 120),
+          filled: true,
+          enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(
-                width: 2,
-                strokeAlign: 1,
-                color: Colors.grey,
-              ),
+              borderSide: const BorderSide(width: 0)),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(
+              width: 2,
+              strokeAlign: 1,
+              color: Colors.grey,
             ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            label: Text(
-              label,
-              style: const TextStyle(
-                  fontFamily: 'product sans',
-                  color: Color.fromARGB(255, 131, 144, 191),
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400),
-            ),
-            suffixIcon: suffixIconButton),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          hintText: '10 Digit Phone number',
+          prefixIcon: const Icon(Icons.phone),
+          prefixIconColor: const Color.fromARGB(255, 18, 20, 39),
+          suffixIconColor: Colors.white,
+          suffixIconConstraints:
+              const BoxConstraints.expand(height: 100, width: 50),
+          suffixIcon: widget.controller.text.length == 10
+              ? Container(
+                  margin: const EdgeInsets.all(7),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 2.0),
+                      color: Colors.green),
+                  // padding: const EdgeInsets.all(10.0),
+                  child: GestureDetector(
+                      onTap: () {
+                        var phoneNumber = widget.controller.text.trim();
+                        BlocProvider.of<AuthBloc>(context).add(
+                            AuthSenOtptoPhoneEvent(
+                                phoneNumber: "+91$phoneNumber"));
+                      },
+                      child: const Icon(Icons.arrow_forward)),
+                )
+              : null,
+        ),
+        onChanged: (value) {
+          setState(() {});
+        },
       ),
     );
   }

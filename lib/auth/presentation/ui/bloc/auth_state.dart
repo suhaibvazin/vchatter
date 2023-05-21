@@ -25,3 +25,13 @@ class AuthErrorState extends AuthState {
   @override
   List<Object?> get props => [];
 }
+
+class AuthCodeSentSuccessState extends AuthState {
+  final String verificationId;
+  AuthCodeSentSuccessState({
+    required this.verificationId,
+  });
+
+  @override
+  List<Object?> get props => [];
+}

@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "926510339760-2svi4nh2c8dj28isfv7bft0luo8akbrk.apps.googleusercontent.com",
+          "client_id": "926510339760-ji80gecbo6clh45diu4ks2fgufo0fo6l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vortexconsortium.vchatter",
+            "certificate_hash": "b0f62171da3e6862a65f4ab68bfa4e0bfb8d69c7"
+          }
+        },
+        {
+          "client_id": "926510339760-9b2hg6oo7qq93datv1guc7mlmt4b35qa.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -29,6 +37,13 @@
             {
               "client_id": "926510339760-2svi4nh2c8dj28isfv7bft0luo8akbrk.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "926510339760-hevqf8s1h40q10u92hcqhp3ul30b0dos.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vortexconsortium.vchatter"
+              }
             }
           ]
         }
