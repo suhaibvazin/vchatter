@@ -68,8 +68,6 @@ class _OtpScreenState extends State<OtpScreen> {
                   padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
                   child: Pinput(
                     controller: _codeController,
-                    androidSmsAutofillMethod:
-                        AndroidSmsAutofillMethod.smsUserConsentApi,
                     listenForMultipleSmsOnAndroid: true,
                     autofocus: true,
                     closeKeyboardWhenCompleted: true,

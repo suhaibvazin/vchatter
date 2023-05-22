@@ -56,7 +56,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         await authRepository.verifyPhone(
           phoneNumber: event.phoneNumber,
-          verificationCompleted: (PhoneAuthCredential credential) async {
+          verificationCompleted: (PhoneAuthCredential credential) {
             add(AuthPhoneVerificationCompleteEvent(credential: credential));
           },
           codeSent: (String verificationId, int? resendToken) {
@@ -68,9 +68,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           },
           codeAutoRetrievalTimeout: (String verificationId) {},
         );
+      } on FirebaseAuthException catch (e) {
+        emit(AuthErrorState(e.toString()));
+        emit(AuthLoggedOutState());
+        print(e.code);
       } catch (e) {
         emit(AuthErrorState(e.toString()));
         emit(AuthLoggedOutState());
+        print("NoramalException:${e.toString()}");
       }
     });
 
